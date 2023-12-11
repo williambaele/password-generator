@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { MdArrowRightAlt } from "react-icons/md";
 
 const PasswordCenter = () => {
   // OPTIONS
@@ -48,10 +49,10 @@ const PasswordCenter = () => {
   }, [passwordConfig]);
 
   return (
-    <div className="p-2 space-y-4 bg-[#24232A] h-max py-4">
+    <div className="p-4 space-y-4 bg-[#24232A] h-max py-4">
       <div className="flex justify-between w-full">
-        <p className="text-xl text-[#ABF4B6]">Character length</p>
-        <p className="text-xl text-[#ABF4B6] font-bold">{rangeValue}</p>
+        <p className="text-2xl text-[#ABF4B6]">Character length</p>
+        <p className="text-2xl text-[#ABF4B6] font-bold">{rangeValue}</p>
       </div>
       <div className="range">
         <input
@@ -66,7 +67,7 @@ const PasswordCenter = () => {
       </div>
       <div className="flex flex-col gap-2">
         {options.map((option, index) => (
-          <div className="flex gap-4 text-gray-400" key={index}>
+          <div className="flex gap-4 text-lg text-gray-400" key={index}>
             <label
               className="container flex gap-2"
               onClick={() => handleCheckboxClick(option.value)}
@@ -99,8 +100,9 @@ const PasswordCenter = () => {
           </div>
         </div>
       </div>
-      <div className="border border-[#ABF4B6] flex items-center justify-center p-2">
-        <p className="text-[#ABF4B6]">GENERATE</p>
+      <div className="cursor-pointer bg-[#ABF4B6] text-gray-900 hover:text-[#ABF4B6] hover:bg-gray-900 hover:border hover:border-[#ABF4B6] flex items-center justify-center p-4 gap-4">
+        <p className="text-2xl ">GENERATE</p>
+        <MdArrowRightAlt style={{ fontSize: "20px" }} />
       </div>
     </div>
   );
