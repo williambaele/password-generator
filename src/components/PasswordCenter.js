@@ -51,14 +51,14 @@ const PasswordCenter = () => {
   return (
     <div className="p-4 space-y-4 bg-[#24232A] h-max py-4">
       <div className="flex justify-between w-full">
-        <p className="text-2xl text-[#ABF4B6]">Character length</p>
+        <p className="text-2xl text-gray-400">Character length</p>
         <p className="text-2xl text-[#ABF4B6] font-bold">{rangeValue}</p>
       </div>
       <div className="range">
         <input
           type="range"
           min="0"
-          max="50"
+          max="20"
           onChange={(e) => setRangeValue(e.target.value)}
           value={rangeValue}
           id="range2"
@@ -100,7 +100,7 @@ const PasswordCenter = () => {
           </div>
         </div>
       </div>
-      <div className="cursor-pointer bg-[#ABF4B6] text-gray-900 hover:text-[#ABF4B6] hover:bg-gray-900 hover:border hover:border-[#ABF4B6] flex items-center justify-center p-4 gap-4">
+      <div className=" border border-[#ABF4B6] cursor-pointer bg-[#ABF4B6] text-gray-900 hover:text-[#ABF4B6] hover:bg-transparent hover:border hover:border-[#ABF4B6] flex items-center justify-center p-3 gap-4">
         <p className="text-2xl ">GENERATE</p>
         <MdArrowRightAlt style={{ fontSize: "20px" }} />
       </div>
