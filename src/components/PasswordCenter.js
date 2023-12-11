@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowRightAlt } from "react-icons/md";
 
-const PasswordCenter = () => {
+const PasswordCenter = ({ updateGeneratedPassword }) => {
   // OPTIONS
   const options = [
     { name: "Include Uppercase Letters", value: 1 },
@@ -35,18 +35,108 @@ const PasswordCenter = () => {
 
   useEffect(() => {
     let strength = "WEAK";
-    //SVG COLOR
 
-    if (passwordConfig.has(1)) {
-      strength = "WEAK";
-    } else if (passwordConfig.has(2)) {
-      strength = "MEDIUM";
-    } else if (passwordConfig.has(3) || passwordConfig.has(4)) {
+    if (passwordConfig.has(1) && passwordConfig.has(2)) {
       strength = "STRONG";
+    } else if (
+      passwordConfig.has(1) ||
+      passwordConfig.has(2) ||
+      passwordConfig.has(3) ||
+      passwordConfig.has(4)
+    ) {
+      strength = "MEDIUM";
     }
 
     setPasswordStrength(strength);
   }, [passwordConfig]);
+
+  // PASSWORD GENERATING
+  const randomNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const randomSymbols = ["!", "_", "-", "?", "&", "#"];
+  const randomUpperLetters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
+  const randomLowerLetters = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+
+  const generatePassword = () => {
+    const selectedCharacters = [];
+
+    if (passwordConfig.has(1)) selectedCharacters.push(...randomUpperLetters);
+    if (passwordConfig.has(2)) selectedCharacters.push(...randomLowerLetters);
+    if (passwordConfig.has(3)) selectedCharacters.push(...randomNumbers);
+    if (passwordConfig.has(4)) selectedCharacters.push(...randomSymbols);
+
+    if (selectedCharacters.length === 0) {
+      // No options selected, return an empty password
+      setGeneratedPassword("");
+      return;
+    }
+
+    let password = "";
+    const charactersLength = selectedCharacters.length;
+
+    for (let i = 0; i < rangeValue; i++) {
+      const randomIndex = Math.floor(Math.random() * charactersLength);
+      password += selectedCharacters[randomIndex];
+    }
+
+    updateGeneratedPassword(password);
+  };
+
+  // GENERATED PASSWORD
+  const [generatedPassword, setGeneratedPassword] = useState("");
 
   return (
     <div className="p-4 space-y-4 bg-[#24232A] h-max py-4">
@@ -100,9 +190,15 @@ const PasswordCenter = () => {
           </div>
         </div>
       </div>
-      <div className=" border border-[#ABF4B6] cursor-pointer bg-[#ABF4B6] text-gray-900 hover:text-[#ABF4B6] hover:bg-transparent hover:border hover:border-[#ABF4B6] flex items-center justify-center p-3 gap-4">
-        <p className="text-2xl ">GENERATE</p>
+      <div
+        onClick={generatePassword}
+        className="border border-[#ABF4B6] cursor-pointer bg-[#ABF4B6] text-gray-900 hover:text-[#ABF4B6] hover:bg-transparent hover:border hover:border-[#ABF4B6] flex items-center justify-center p-3 gap-4"
+      >
+        <p className="text-2xl">GENERATE</p>
         <MdArrowRightAlt style={{ fontSize: "20px" }} />
+      </div>
+      <div className="mt-4 text-xl text-gray-400">
+        {generatedPassword && `Generated Password: ${generatedPassword}`}
       </div>
     </div>
   );
