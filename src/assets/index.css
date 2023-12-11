@@ -38,45 +38,6 @@ code {
 }
 
 /*CUSTOM CSS*/
-.range-input {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  cursor: pointer;
-  outline: none;
-  border-radius: 15px;
-  height: 6px;
-  background: linear-gradient(
-    to right,
-    #abf4b6 0%,
-    #abf4b6 0%,
-    #ccc 0%
-  ) !important;
-  position: relative;
-}
-
-.range-input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 15px;
-  width: 15px;
-  background-color: #abf4b6 !important;
-  border-radius: 50%;
-  border: none;
-  transition: 0.2s ease-in-out;
-  position: relative;
-  z-index: 1;
-}
-
-.range-input::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc((100% - 15px) * calc(1 - var(--range-value)));
-  height: 100%;
-  background: #abf4b6;
-}
 
 input[type="checkbox"] {
   background: #abf4b6 !important;
@@ -84,4 +45,9 @@ input[type="checkbox"] {
 
 input[type="checkbox"] {
   accent-color: #abf4b6;
+}
+
+input[type="range"] {
+  accent-color: #abf4b6 !important;
+  border: none;
 }

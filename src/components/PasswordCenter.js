@@ -16,11 +16,9 @@ const PasswordCenter = ({ updateGeneratedPassword }) => {
   // PASSWORD CONFIG
   const [passwordConfig, setPasswordConfig] = useState(new Set());
 
-  // Function to handle checkbox click
   const handleCheckboxClick = (value) => {
     const updatedConfig = new Set(passwordConfig);
 
-    // Toggle the value in the Set
     if (updatedConfig.has(value)) {
       updatedConfig.delete(value);
     } else {
@@ -31,7 +29,11 @@ const PasswordCenter = ({ updateGeneratedPassword }) => {
   };
 
   // PASSWORD STRENGTH
+  // PASSWORD STRENGTH
   const [passwordStrength, setPasswordStrength] = useState("WEAK");
+  const [strengthColor, setStrengthColor] = useState("#FF0000");
+
+  // ...
 
   useEffect(() => {
     let strength = "WEAK";
@@ -48,6 +50,15 @@ const PasswordCenter = ({ updateGeneratedPassword }) => {
     }
 
     setPasswordStrength(strength);
+
+    // Update strength color based on the strength
+    if (strength === "MEDIUM") {
+      setStrengthColor("#FFA500");
+    } else if (strength === "STRONG") {
+      setStrengthColor("#008000");
+    } else {
+      setStrengthColor("#FF0000");
+    }
   }, [passwordConfig]);
 
   // PASSWORD GENERATING
@@ -152,7 +163,7 @@ const PasswordCenter = ({ updateGeneratedPassword }) => {
           onChange={(e) => setRangeValue(e.target.value)}
           value={rangeValue}
           id="range2"
-          className="range-input"
+          className="w-full bg-red-200"
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -175,19 +186,9 @@ const PasswordCenter = ({ updateGeneratedPassword }) => {
       <div className="flex items-center justify-between p-4 bg-[#18171F]">
         <p className="text-xl text-gray-400">STRENGTH</p>
         <div className="flex items-center justify-between gap-2">
-          <p className="text-xl text-gray-400">{passwordStrength}</p>
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4].map((item) => (
-              <svg key={item} width="6" height="25">
-                <rect
-                  width="6"
-                  height="25"
-                  fill="#FFFFFF" // Use the fill property directly
-                  stroke="#FFFFFF"
-                />
-              </svg>
-            ))}
-          </div>
+          <p style={{ fontSize: "1.3rem", color: strengthColor }}>
+            {passwordStrength}
+          </p>
         </div>
       </div>
       <div
